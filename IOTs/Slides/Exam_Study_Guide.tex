@@ -1,0 +1,648 @@
+% Compile with: pdflatex Exam_Study_Guide.tex
+\documentclass[9pt,a4paper,twocolumn]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T5]{fontenc}
+\usepackage[vietnamese]{babel}
+\usepackage[margin=1.2cm,top=1.4cm,bottom=1.2cm,columnsep=0.5cm]{geometry}
+\usepackage[table,dvipsnames]{xcolor}
+\usepackage{tcolorbox}
+\tcbuselibrary{breakable,skins}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{parskip}
+\usepackage{titlesec}
+\usepackage{array}
+\usepackage{tabularx}
+\usepackage{multicol}
+
+% ---- Spacing ----
+\setlength{\parskip}{2pt}
+\setlength{\parindent}{0pt}
+\setlist{nosep, leftmargin=1.2em, topsep=1pt, itemsep=0pt}
+\titlespacing*{\section}{0pt}{5pt}{2pt}
+\titlespacing*{\subsection}{0pt}{3pt}{1pt}
+\titleformat{\section}{\normalfont\bfseries\small}{}{0em}{}
+\titleformat{\subsection}{\normalfont\bfseries\footnotesize}{}{0em}{}
+
+% ---- Colors ----
+\definecolor{weekcolor}{RGB}{220,235,255}
+\definecolor{weekframe}{RGB}{70,130,200}
+\definecolor{trapcolor}{RGB}{255,235,210}
+\definecolor{trapframe}{RGB}{210,120,40}
+\definecolor{insightcolor}{RGB}{215,240,215}
+\definecolor{insightframe}{RGB}{60,160,60}
+\definecolor{deepcolor}{RGB}{235,220,250}
+\definecolor{deepframe}{RGB}{130,70,180}
+\definecolor{codebg}{RGB}{245,245,245}
+
+% ---- tcolorbox styles ----
+\tcbset{
+  weekbox/.style={
+    colback=weekcolor, colframe=weekframe, boxrule=0.7pt,
+    fonttitle=\bfseries\small, coltitle=black,
+    left=3pt, right=3pt, top=2pt, bottom=2pt,
+    toptitle=2pt, bottomtitle=1pt, breakable
+  },
+  trapbox/.style={
+    colback=trapcolor, colframe=trapframe, boxrule=0.5pt,
+    left=3pt, right=3pt, top=2pt, bottom=2pt, breakable
+  },
+  insightbox/.style={
+    colback=insightcolor, colframe=insightframe, boxrule=0.5pt,
+    left=3pt, right=3pt, top=2pt, bottom=2pt, breakable
+  },
+  deepbox/.style={
+    colback=deepcolor, colframe=deepframe, boxrule=0.7pt,
+    fonttitle=\bfseries\small, coltitle=black,
+    left=3pt, right=3pt, top=2pt, bottom=2pt,
+    toptitle=2pt, bottomtitle=1pt, breakable
+  },
+}
+
+% ---- Code listings ----
+\lstset{
+  basicstyle=\ttfamily\scriptsize,
+  backgroundcolor=\color{codebg},
+  frame=none, breaklines=true,
+  columns=fullflexible, keepspaces=true,
+  aboveskip=2pt, belowskip=2pt,
+  xleftmargin=3pt, xrightmargin=3pt,
+  inputencoding=utf8,
+  extendedchars=true,
+  literate=
+    {á}{{\'a}}1 {à}{{\`a}}1 {ả}{{\h{a}}}1 {ã}{{\~a}}1 {ạ}{{\d{a}}}1
+    {ă}{{\u{a}}}1 {ắ}{{\'\u{a}}}1 {ằ}{{\`\u{a}}}1 {ẳ}{{\h{\u{a}}}}1
+    {ẵ}{{\~\u{a}}}1 {ặ}{{\d{\u{a}}}}1
+    {â}{{\^a}}1 {ấ}{{\'{\^a}}}1 {ầ}{{\`{\^a}}}1 {ẩ}{{\h{\^a}}}1
+    {ẫ}{{\~{\^a}}}1 {ậ}{{\d{\^a}}}1
+    {đ}{{\dj}}1 {Đ}{{\DJ}}1
+    {é}{{\'e}}1 {è}{{\`e}}1 {ẻ}{{\h{e}}}1 {ẽ}{{\~e}}1 {ẹ}{{\d{e}}}1
+    {ê}{{\^e}}1 {ế}{{\'{\^e}}}1 {ề}{{\`{\^e}}}1 {ể}{{\h{\^e}}}1
+    {ễ}{{\~{\^e}}}1 {ệ}{{\d{\^e}}}1
+    {í}{{\'i}}1 {ì}{{\`i}}1 {ỉ}{{\h{i}}}1 {ĩ}{{\~i}}1 {ị}{{\d{i}}}1
+    {ó}{{\'o}}1 {ò}{{\`o}}1 {ỏ}{{\h{o}}}1 {õ}{{\~o}}1 {ọ}{{\d{o}}}1
+    {ô}{{\^o}}1 {ố}{{\'{\^o}}}1 {ồ}{{\`{\^o}}}1 {ổ}{{\h{\^o}}}1
+    {ỗ}{{\~{\^o}}}1 {ộ}{{\d{\^o}}}1
+    {ơ}{{\ohorn}}1 {ớ}{{\'{\ohorn}}}1 {ờ}{{\`{\ohorn}}}1
+    {ở}{{\h{\ohorn}}}1 {ỡ}{{\~{\ohorn}}}1 {ợ}{{\d{\ohorn}}}1
+    {ú}{{\'u}}1 {ù}{{\`u}}1 {ủ}{{\h{u}}}1 {ũ}{{\~u}}1 {ụ}{{\d{u}}}1
+    {ư}{{\uhorn}}1 {ứ}{{\'{\uhorn}}}1 {ừ}{{\`{\uhorn}}}1
+    {ử}{{\h{\uhorn}}}1 {ữ}{{\~{\uhorn}}}1 {ự}{{\d{\uhorn}}}1
+    {ý}{{\'y}}1 {ỳ}{{\`y}}1 {ỷ}{{\h{y}}}1 {ỹ}{{\~y}}1 {ỵ}{{\d{y}}}1
+    {→}{{$\rightarrow$}}1 {←}{{$\leftarrow$}}1
+    {↓}{{$\downarrow$}}1 {↑}{{$\uparrow$}}1
+    {↔}{{$\leftrightarrow$}}1
+    {─}{{\textemdash}}1 {│}{{|}}1
+    {┌}{{+}}1 {┐}{{+}}1 {└}{{+}}1 {┘}{{+}}1
+    {├}{{+}}1 {┤}{{+}}1 {┬}{{+}}1 {┴}{{+}}1 {┼}{{+}}1
+}
+
+\newcommand{\code}[1]{\texttt{\small #1}}
+\newcommand{\bold}[1]{\textbf{#1}}
+
+% ===================================================================
+\begin{document}
+% ===================================================================
+
+\begin{center}
+  {\large\bfseries Ôn Thi --- Advanced IoT (7 tuần)}\\[1pt]
+  {\footnotesize TS. Huỳnh Văn Đặng | UIT-VNUHCM | Đề mở, tự luận}
+\end{center}
+\vspace{-4pt}
+\hrule
+\vspace{4pt}
+
+% -------------------------------------------------------------------
+\section*{Mạch chung --- Một câu hỏi, bảy tuần}
+% -------------------------------------------------------------------
+
+\textit{``Làm sao xây IoT \textbf{thông minh, bảo mật, kết nối toàn cầu} khi device nhỏ,
+pin ít, data nhạy cảm, mạng không phủ hết?''}
+
+\begin{itemize}
+  \item \textbf{W1}: Kiến trúc tổng thể? Digital Twin là đích đến.
+  \item \textbf{W2}: AI chạy trên device nhỏ thế nào? --- TinyML
+  \item \textbf{W3}: Học cộng tác không chia sẻ data? --- FL
+  \item \textbf{W4}: Giao tiếp local không phụ thuộc cloud? --- Matter/Thread
+  \item \textbf{W5}: Kết nối toàn cầu, vùng xa? --- 6G/NTN
+  \item \textbf{W6}: Bảo vệ toàn stack? --- Security
+  \item \textbf{W7}: Những gì chưa giải được? --- Open Research
+\end{itemize}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W1 --- Kiến trúc IoT \& Digital Twin}]
+% -------------------------------------------------------------------
+
+\textbf{Ba era IoT}
+
+\begin{tabular}{@{}p{1.6cm}p{3.8cm}@{}}
+\toprule
+\scriptsize Era & \scriptsize Đặc điểm chính \\
+\midrule
+\scriptsize IoT 1.0 & \scriptsize Sensor→server, người nhìn dashboard \\
+\scriptsize IoT 2.0 & \scriptsize Cloud analytics, scale lớn hơn \\
+\scriptsize IoT 3.0 & \scriptsize Digital Twin, tự dự đoán, vòng lặp kín \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Lưu ý quan trọng:} 1.0→2.0 paradigm KHÔNG đổi (vẫn human-in-loop).
+Bước nhảy thật là \textbf{2.0→3.0}:
+
+\begin{tabular}{@{}p{2cm}p{1.5cm}p{1.9cm}@{}}
+\toprule
+\scriptsize & \scriptsize 1.0 \& 2.0 & \scriptsize 3.0 (DT) \\
+\midrule
+\scriptsize Ai quyết định & \scriptsize Người & \scriptsize Hệ thống \\
+\scriptsize Phản ứng & \scriptsize Sau khi xảy & \scriptsize Trước khi xảy \\
+\scriptsize Cloud & \scriptsize Bắt buộc & \scriptsize Tuỳ chọn \\
+\scriptsize Vòng lặp & \scriptsize Mở & \scriptsize Kín \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Digital Twin = Đích, không phải mảng.} Mọi W2--W6 đều nuôi DT.
+Khi thi: kết thúc câu nào cũng được bằng
+\textit{``...tầng cần thiết để hiện thực hoá Digital Twin.''}
+
+\vspace{3pt}
+\textbf{AAS / DTDL / NGSI-LD} --- tại sao cần? DT không hiểu raw JSON.
+Cần ngữ nghĩa: \texttt{t} là nhiệt độ hay thời gian? Đơn vị? Ngưỡng?
+
+\begin{tabular}{@{}p{1.2cm}p{1.8cm}p{2.4cm}@{}}
+\toprule
+\scriptsize Chuẩn & \scriptsize Nguồn & \scriptsize Câu hỏi trung tâm \\
+\midrule
+\scriptsize AAS & \scriptsize Industry 4.0 & \scriptsize Vòng đời tài sản? \\
+\scriptsize DTDL & \scriptsize Microsoft & \scriptsize Interface thiết bị? \\
+\scriptsize NGSI-LD & \scriptsize ETSI SmartCity & \scriptsize Quan hệ với thế giới? \\
+\bottomrule
+\end{tabular}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W1:} Mục tiêu IoT không phải thu thập data --- mà là
+\textbf{hành động tự động từ data}. Digital Twin là não ảo giữa data và hành động.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W2 --- TinyML (Trí tuệ trên device nhỏ)}]
+% -------------------------------------------------------------------
+
+\textbf{Pain (cloud AI):} latency (100s ms), bandwidth, privacy, resilience.
+
+\textbf{Giải pháp:} inference ON device (MCU vài trăm KB RAM).
+
+\textbf{Bottleneck thật:} Peak \textbf{SRAM} (activations khi inference), không phải Flash (weights).
+$\Rightarrow$ Quantization (FP32→INT8) + Pruning (cắt weights~$\approx$0).
+$\Rightarrow$ \textbf{MCUNet:} co-design model + runtime từ đầu cho hardware cụ thể.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[trapbox]
+\scriptsize \textbf{Trap holes W2:}
+\begin{enumerate}
+  \item TinyML $\neq$ nén model --- phải co-design từ đầu (MCUNet)
+  \item \textbf{Chỉ inference, không training} --- training vẫn ở cloud
+  \item Model tốt = \textbf{deployable}, không phải accurate nhất
+  \item Không loại bỏ cloud, chỉ giảm phụ thuộc (hybrid)
+  \item TinyML + FL là \textbf{cặp đôi}: TinyML dùng model; FL tạo model
+\end{enumerate}
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W3 --- Federated Learning (FL)}]
+% -------------------------------------------------------------------
+
+\textbf{Pain:} data phân tán, không thể gom (GDPR, bí mật KD, bandwidth).
+
+\textbf{Cơ chế (SE view = Git):}
+\begin{lstlisting}
+fork W_global -> train local -> delta = W_local - W_global
+-> push delta -> server: W_new = W_global + avg(all deltas)
+\end{lstlisting}
+
+\textbf{FL trong IoT:} MCU không train được (cần 3--10$\times$ RAM so với inference).
+$\Rightarrow$ \textbf{FL client = Edge Gateway}, không phải sensor.
+Sensor gửi raw data lên Edge. Edge train và gửi delta lên Cloud.
+
+\textbf{Privacy stack} (cần cả 3 tầng):
+\begin{itemize}
+  \item Tầng 1 --- FL: data không rời device
+  \item Tầng 2 --- Secure Aggregation: server chỉ thấy \textbf{tổng}, không thấy delta riêng
+  \item Tầng 3 --- Differential Privacy: thêm nhiễu, chặn gradient inversion
+\end{itemize}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[trapbox]
+\scriptsize \textbf{Trap holes W3:}
+\begin{enumerate}
+  \item FL $\neq$ privacy đảm bảo (cần SecAgg + DP)
+  \item \textbf{SecAgg $\neq$ DP:} SecAgg chặn server-curious; DP chặn reconstruction attack
+  \item \textbf{Non-IID} = vấn đề cốt lõi chưa giải: FedAvg non-IID $\approx$78\% vs centralized 95\%
+  \item FL $\neq$ Distributed Training (privacy vs performance --- khác mục đích)
+\end{enumerate}
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W3:} Chia sẻ tri thức (model), không chia sẻ data.
+FL là câu trả lời kiến trúc cho bài toán privacy phân tán.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W4 --- Matter, Thread, MQTT, CoAP}]
+% -------------------------------------------------------------------
+
+\textbf{``Tháp Babel''} (Kinh Thánh): mỗi người nói tiếng khác $\rightarrow$ không ai hiểu ai $\rightarrow$ công trình sụp.
+IoT trước 2020: Zigbee/Z-Wave/HAP/SmartThings = chiến lược \textbf{lock-in}.
+
+\textbf{Matter:} IP-first, local-first, Multi-Admin.
+Apple+Google+Amazon+Samsung đồng ý chuẩn chung tầng application.
+
+\textbf{BLE trong Matter --- 2 lần xuất hiện:}
+\begin{enumerate}
+  \item Phần \textbf{vấn đề}: BLE truyền thống point-to-point, mesh đến muộn
+  \item Phần \textbf{giải pháp}: BLE = bootstrap commissioning (sau đó tắt hẳn)
+\end{enumerate}
+
+\textbf{Commissioning flow:} BLE adv $\rightarrow$ QR scan (discriminator+passcode)
+$\rightarrow$ PASE handshake (mã hoá BLE) $\rightarrow$ Device Attestation (cert nhà SX)
+$\rightarrow$ gửi WiFi/Thread creds $\rightarrow$ BLE ngắt $\rightarrow$ Fabric assignment.
+
+\textbf{Tại sao BLE?} Chicken-and-egg: cần BLE để truyền WiFi password vào device chưa có WiFi.
+
+\textbf{Thread:} IPv6 mesh tự vá. Roles: Leader/Router/End Device.
+Border Router kết nối mesh ra WiFi/Internet.
+
+\vspace{3pt}
+\begin{tabular}{@{}p{1.5cm}p{1.8cm}p{2.1cm}@{}}
+\toprule
+\scriptsize & \scriptsize MQTT & \scriptsize CoAP \\
+\midrule
+\scriptsize Mô hình & \scriptsize Pub/Sub (broker) & \scriptsize Req/Res (trực tiếp) \\
+\scriptsize Transport & \scriptsize TCP & \scriptsize UDP \\
+\scriptsize Security & \scriptsize TLS & \scriptsize DTLS + OSCORE \\
+\scriptsize Tốt cho & \scriptsize Nhiều device→cloud & \scriptsize Device↔device \\
+\bottomrule
+\end{tabular}
+
+\vspace{2pt}
+Thực tế: \textbf{CoAP} device→edge, \textbf{MQTT} edge→cloud. Không phải đối thủ.
+OSCORE \textbf{chỉ chạy với CoAP} (end-to-end qua proxy).
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W4:} Interoperability phải thiết kế upfront qua chuẩn.
+``Local-first'' không phải bước lùi --- cloud là extension, không phải dependency.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W5 --- 6G \& Non-Terrestrial Networks (NTN)}]
+% -------------------------------------------------------------------
+
+\textbf{Tại sao W5 trong khoá IoT?} DT cần always-on connectivity.
+W4 phủ local; W5 phủ sensor giữa đại dương/vùng núi/sa mạc.
+
+\begin{tabular}{@{}p{0.8cm}p{2.0cm}p{2.6cm}@{}}
+\toprule
+\scriptsize & \scriptsize Bài toán giải & \scriptsize Cho ai \\
+\midrule
+\scriptsize 3G & \scriptsize Internet trên mobile & \scriptsize Người \\
+\scriptsize 4G & \scriptsize Mobile broadband & \scriptsize Người \\
+\scriptsize 5G & \scriptsize 3 nhu cầu khác nhau & \scriptsize Người + máy \\
+\scriptsize 6G & \scriptsize Phủ sóng toàn cầu + AI & \scriptsize Máy móc chính \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{5G = 3 slices:} eMBB (video, high-BW), mMTC (IoT sensors, pin năm),
+URLLC ($<$1ms, robot, xe tự lái).
+
+\textbf{6G = 4 tầng NTN:}
+\begin{itemize}
+  \item Vệ tinh LEO (500--2000km, latency $\sim$20ms, toàn cầu)
+  \item \textbf{HAPS} ($\sim$20km tầng bình lưu, quasi-stationary, vùng rộng)
+  \item UAV (linh hoạt, on-demand base station)
+  \item Mặt đất (dày đặc, đô thị)
+\end{itemize}
+
+\textbf{UAV -- 2 vai trò:} (1) user = kết nối như điện thoại nhưng có interference issues;
+(2) \textbf{base station} = bay lên phủ sóng IoT bên dưới, backhaul qua satellite.
+
+\textbf{HAPS:} trên mây + máy bay; dưới vệ tinh; phủ hàng trăm km; quasi-stationary.
+(Ví dụ: Google Loon, Airbus Zephyr).
+
+\textbf{3GPP:} Rel-17 = milestone tích hợp satellite; Rel-19 = cầu nối 6G.
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W5:} IoT toàn cầu không thể chỉ dựa mặt đất.
+6G = AI-native + phủ sóng 3D (đất + trời + vũ trụ). NTN là kiến trúc chính, không phải add-on.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W6 --- IoT Security (Toàn stack)}]
+% -------------------------------------------------------------------
+
+\textbf{IT vs IoT Security:}
+
+\begin{tabular}{@{}p{1.6cm}p{1.8cm}p{2.0cm}@{}}
+\toprule
+\scriptsize Yếu tố & \scriptsize IT & \scriptsize IoT \\
+\midrule
+\scriptsize Vòng đời & \scriptsize 3--5 năm & \scriptsize 10--20 năm, không vá \\
+\scriptsize Vị trí & \scriptsize Data center & \scriptsize Ngoài trời tự do \\
+\scriptsize Hậu quả & \scriptsize Mất data & \scriptsize Vật lý: tính mạng \\
+\scriptsize Tài nguyên & \scriptsize TLS/RSA ok & \scriptsize MCU quá yếu \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Attack vectors (lý do phải bảo vệ từng tầng):}
+\begin{itemize}
+  \item HW: firmware dump (JTAG), device clone, side-channel attack
+  \item OTA: fake firmware push $\rightarrow$ kiểm soát fleet
+  \item Network: MITM, replay attack (bắt ``mở cửa'' gửi lại), spoofing
+  \item App: data poisoning (DT ra lệnh sai), command injection
+  \item Scale: \textbf{Mirai 2016} = 600K cameras (default password) $\rightarrow$ DDoS Twitter/Netflix
+  \item Cascade: device $\rightarrow$ gateway $\rightarrow$ cloud $\rightarrow$ toàn fleet
+\end{itemize}
+
+\textbf{Security stack (phải có đủ 4 tầng):}
+
+\begin{itemize}
+  \item \textbf{PUF}: vân tay vật lý chip (manufacturing variation), key sinh từ vật lý, không lưu bộ nhớ $\rightarrow$ không đọc được, không clone được
+  \item \textbf{Secure Boot}: ROM $\rightarrow$ Bootloader $\rightarrow$ Firmware $\rightarrow$ App, mỗi bước verify chữ ký $\rightarrow$ firmware giả không chạy được
+  \item \textbf{TEE/TrustZone}: Normal World (OS, có thể bị hack) $\Vert$ Secure World (keys, crypto). Key không bao giờ ra ngoài TEE.
+  \item \textbf{Thread AES}: AES-128 link layer, hop-by-hop trong mesh, chống radio scanner
+  \item \textbf{DTLS}: TLS cho UDP (CoAP dùng UDP). Thêm: seq number, retransmit, Connection ID
+  \item \textbf{OSCORE}: mã hoá \textbf{message} (object), không phải channel. Sống qua proxy. DTLS/TLS=VPN tunnel; OSCORE=Signal E2E.
+\end{itemize}
+
+\begin{lstlisting}
+[HW]  PUF -> Secure Boot -> TEE
+[L2]  Thread AES (hop-by-hop)
+[L4]  DTLS (per-segment)
+[App] OSCORE (true end-to-end, qua proxy)
+\end{lstlisting}
+
+\textbf{STRIDE:} \textbf{S}poofing / \textbf{T}ampering / \textbf{R}epudiation /
+\textbf{I}nfo Disclosure / \textbf{D}oS / \textbf{E}levation of Privilege
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W6:} Security không phải add-on --- phải là kiến trúc từ hardware.
+Một tầng thủng $\Rightarrow$ cascade compromise. IoT security $\neq$ IT security thu nhỏ.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[weekbox, title={W7 --- Open Research (Biên giới tri thức)}]
+% -------------------------------------------------------------------
+
+W7 không dạy giải pháp --- dạy biết \textbf{ranh giới} của tri thức hiện tại.
+
+\begin{itemize}
+  \item \textbf{DT}: 1M sensors = 10M updates/s, physics model accuracy vs speed
+  \item \textbf{TinyML}: fleet model management, model drift, MLOps cho IoT scale chưa có
+  \item \textbf{FL}: non-IID gap (FedAvg 78\% vs centralized 95\%), heterogeneous devices, comm overhead
+  \item \textbf{Matter}: legacy gap (tỉ Zigbee/Z-Wave devices), industrial IoT ngoài scope
+  \item \textbf{6G}: THz (range vài chục m, bị air hấp thụ), RIS (cần exact position), ISAC (signal separation cực khó)
+  \item \textbf{Security}: Zero Trust cho MCU --- continuous auth = pin cạn, history = RAM hết, policy enforcement = cần online liên tục
+\end{itemize}
+
+\end{tcolorbox}
+
+\begin{tcolorbox}[insightbox]
+\scriptsize \textbf{Insight W7:} IoT chưa phải ngành solved. Mỗi tuần học = giải pháp tốt nhất
+hiện tại. W7 = biên giới, không phải cuối đường.
+Câu tự luận hoàn chỉnh = giải pháp + trade-off + open challenge.
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\section*{Bản đồ kết nối 7 tuần}
+% -------------------------------------------------------------------
+
+\begin{lstlisting}
+[W1:DT] <-data- [W4:Matter/Thread] <-extend- [W5:6G/NTN]
+   |                   |
+  AI              connectivity
+   v                   v
+[W2:TinyML] --FL-> [W3:FL]
+   |                   |
+   +---- both need -->[W6:Security]
+                         |
+                    all have gaps
+                         v
+                   [W7:Open Research]
+\end{lstlisting}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={Framework Trả Lời Tự Luận (5 bước)}]
+% -------------------------------------------------------------------
+\begin{enumerate}
+  \item \textbf{VẤN ĐỀ:} Pain point trước X?
+  \item \textbf{GIẢI PHÁP:} Cơ chế X là gì?
+  \item \textbf{ĐÁNH ĐỔI:} Trade-off? Khi nào không phù hợp?
+  \item \textbf{KẾT NỐI:} Liên quan tuần nào?
+  \item \textbf{OPEN:} Chưa giải được gì? (W7)
+\end{enumerate}
+
+\textbf{Ví dụ --- ``Tại sao cần FL?''}
+\begin{enumerate}
+  \item Data phân tán, không thể gom (GDPR/bandwidth/privacy)
+  \item Edge Gateway train local $\rightarrow$ gửi delta $\rightarrow$ FedAvg aggregate
+  \item Non-IID gap; gradient leakage (cần DP+SecAgg); MCU không train được
+  \item TinyML (W2) dùng model FL tạo ra; W4/W5 truyền updates; W6 DP+SecAgg
+  \item Non-IID convergence; fleet management; comm overhead (W7)
+\end{enumerate}
+
+\end{tcolorbox}
+
+% ===================================================================
+% DEEP DIVES
+% ===================================================================
+\vspace{4pt}
+\hrule
+\vspace{2pt}
+\begin{center}{\small\bfseries Phân Tích Chuyên Sâu}\end{center}
+\vspace{2pt}
+\hrule
+\vspace{4pt}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={Kiến trúc 4 tầng IoT --- Chi tiết}]
+% -------------------------------------------------------------------
+
+\begin{tabular}{@{}p{1.6cm}p{3.8cm}@{}}
+\toprule
+\scriptsize Tầng & \scriptsize Vai trò \\
+\midrule
+\scriptsize Device/Sensor & \scriptsize Thu thập data, actuator. RAM vài trăm KB, pin, CPU yếu. Protocols: Zigbee/BLE/Thread/LoRa \\
+\scriptsize Edge/Gateway & \scriptsize Bộ não cục bộ. Tổng hợp, dịch protocol (Zigbee→IP), ra quyết định real-time. FL client thực sự. \\
+\scriptsize Cloud & \scriptsize Lịch sử dài hạn, train ML, host Digital Twin, fleet management \\
+\scriptsize User App & \scriptsize Dashboard/app, điểm can thiệp của con người \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Hai luồng data khác nhau:}
+\begin{lstlisting}
+Analytics: Device->Edge->Cloud->App
+Real-time: Device->Edge->Device (cloud khong tham gia)
+\end{lstlisting}
+Edge là nơi hai luồng tách ra.
+
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={Edge vs Cloud --- Framework ra quyết định}]
+% -------------------------------------------------------------------
+
+Phân tích theo \textbf{3 chiều} cho mọi use case:
+
+\begin{tabular}{@{}p{1.6cm}p{1.8cm}p{2.0cm}@{}}
+\toprule
+\scriptsize Chiều & \scriptsize Edge & \scriptsize Cloud \\
+\midrule
+\scriptsize \textbf{Latency} & \scriptsize $<$100ms (safety) & \scriptsize Batch/daily \\
+\scriptsize \textbf{Bandwidth} & \scriptsize Video/audio/lidar & \scriptsize Sensor nhỏ \\
+\scriptsize \textbf{Computation} & \scriptsize Threshold, TinyML & \scriptsize Train model \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Ví dụ: Nông nghiệp IoT}
+
+\begin{tabular}{@{}p{2.4cm}p{0.8cm}p{0.8cm}p{0.5cm}p{0.6cm}@{}}
+\toprule
+\scriptsize Tác vụ & \scriptsize Lat & \scriptsize BW & \scriptsize CPU & \scriptsize $\Rightarrow$ \\
+\midrule
+\scriptsize Phát hiện sâu→phun & \scriptsize Gấp & \scriptsize Nặng & \scriptsize Vừa & \scriptsize \textbf{Edge} \\
+\scriptsize Tưới theo lịch & \scriptsize Không & \scriptsize Nhỏ & \scriptsize Nhẹ & \scriptsize Cloud \\
+\scriptsize Train model mới & \scriptsize Không & \scriptsize Lớn & \scriptsize Nặng & \scriptsize Cloud \\
+\scriptsize Dự báo mùa vụ & \scriptsize Không & \scriptsize Lớn & \scriptsize Rất nặng & \scriptsize Cloud \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+$\Rightarrow$ Kết luận luôn là \textbf{hybrid}: edge = real-time + data nặng; cloud = analytics + training.
+
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={Chọn Protocol Truyền Thông}]
+% -------------------------------------------------------------------
+
+\begin{lstlisting}
+small + rare + remote   -> LoRaWAN / NB-IoT
+small + local + battery -> Thread + CoAP
+many devices -> cloud   -> MQTT
+device <-> device       -> CoAP
+video + local           -> WiFi 6
+video + wide-area       -> 5G eMBB
+<1ms critical control   -> 5G URLLC
+\end{lstlisting}
+
+\textbf{Tại sao Thread/CoAP/MQTT không dùng cho video?}
+Thread $\approx$250Kbps --- một frame HD đã vượt quá.
+MQTT/CoAP phụ thuộc bandwidth của mạng bên dưới, không phải protocol.
+
+5G phân 3 slices vì \textbf{không thể tối ưu mMTC + eMBB + URLLC cùng lúc}.
+
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={Trade-off: Latency vs Accuracy}]
+% -------------------------------------------------------------------
+
+\textbf{Bản chất:}
+\begin{lstlisting}
+Model lon -> cloud -> latency cao -> accuracy cao
+Model nho -> edge -> latency thap -> accuracy thap hon
+\end{lstlisting}
+
+\textbf{Ưu tiên latency khi:} safety-critical (sương giá, rò khí, dừng khẩn cấp).
+Model edge 88\% + 50ms $>$ model cloud 95\% + 2s khi mái che đóng muộn = mùa màng thiệt.
+
+\textbf{Ưu tiên accuracy khi:} chẩn đoán bệnh, dự báo bảo trì --- sai một lần hậu quả lớn hơn chậm.
+
+\textbf{Cải thiện accuracy không hi sinh latency:}
+\begin{itemize}
+  \item \textbf{FL (W3):} nhiều edge train $\rightarrow$ model toàn cục tốt hơn theo thời gian; inference vẫn ở edge
+  \item \textbf{MCUNet (W2):} co-design cho hardware cụ thể $\rightarrow$ accuracy tốt hơn trong cùng RAM
+  \item \textbf{Hierarchical:} edge xử lý cases rõ ràng (high confidence); cloud xử lý edge cases
+\end{itemize}
+
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={3 Điểm Yếu Kiến Trúc 4 Tầng (Security)}]
+% -------------------------------------------------------------------
+
+\textbf{1. Device tầng dưới: không bảo vệ được vật lý}
+
+Server: data center có khoá. IoT device: ngoài đường, trong rừng, trên tàu.
+Kẻ tấn công cầm tay $\rightarrow$ firmware dump, side-channel, device clone.
+Vòng đời 20 năm $\rightarrow$ lỗ hổng sau không thể vá.
+
+\textit{Attack surface này không tồn tại trong IT.}
+
+\textbf{2. Gateway = single point of compromise}
+
+Gateway biết credentials của \textbf{tất cả device bên dưới VÀ cloud bên trên}.
+\begin{lstlisting}
+Gateway bi hack -> pivot ca 2 huong:
+    tat ca device + toan bo cloud
+\end{lstlisting}
+Single point of failure không có trong IT phân tán.
+
+\textbf{3. Cascade attack path dọc}
+
+Các tầng kết nối trực tiếp, không đủ isolation:
+\begin{lstlisting}
+Device (yeu nhat) -> Gateway -> Cloud -> fleet
+\end{lstlisting}
+\textbf{Mirai 2016:} camera default password $\rightarrow$ 600K botnet $\rightarrow$ DDoS Twitter/Netflix.
+
+$\Rightarrow$ Phải bảo vệ từng tầng độc lập + mã hoá xuyên suốt (DTLS+OSCORE).
+
+\end{tcolorbox}
+
+% -------------------------------------------------------------------
+\begin{tcolorbox}[deepbox, title={IoT Security vs IT Security --- Không thể dùng lại nguyên si}]
+% -------------------------------------------------------------------
+
+\begin{tabular}{@{}p{2.8cm}p{2.6cm}@{}}
+\toprule
+\scriptsize Assumption IT security & \scriptsize Thực tế IoT \\
+\midrule
+\scriptsize Đủ mạnh chạy TLS/RSA & \scriptsize MCU vài KB RAM $\rightarrow$ dùng DTLS, ECC, Ascon \\
+\scriptsize Được vá thường xuyên & \scriptsize Vòng đời 15--20 năm, không ai vá $\rightarrow$ phải đúng từ đầu \\
+\scriptsize Môi trường kiểm soát & \scriptsize Device ngoài trời $\rightarrow$ cần PUF, TEE \\
+\scriptsize Vài nghìn thiết bị & \scriptsize Triệu thiết bị $\rightarrow$ key mgmt scale chưa giải \\
+\scriptsize Hậu quả: mất data & \scriptsize Hậu quả: \textbf{máy nổ, tính mạng} \\
+\scriptsize Protocol chuẩn hoá & \scriptsize Chục protocols, mỗi cái security khác \\
+\bottomrule
+\end{tabular}
+
+\vspace{3pt}
+\textbf{Điểm mấu chốt:} Mỗi dòng trong bảng là lý do một tầng trong security stack tồn tại.
+PUF $\leftarrow$ device bị cầm tay. Secure Boot $\leftarrow$ không ai vá firmware.
+DTLS $\leftarrow$ TLS quá nặng. OSCORE $\leftarrow$ proxy terminate DTLS.
+
+\begin{tcolorbox}[insightbox]
+\scriptsize IoT security $\neq$ IT security thu nhỏ --- đây là bài toán thiết kế \textbf{khác hoàn toàn},
+đòi hỏi security-by-design từ phần cứng lên.
+\end{tcolorbox}
+
+\end{tcolorbox}
+
+\end{document}
